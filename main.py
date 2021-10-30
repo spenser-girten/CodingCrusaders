@@ -86,7 +86,22 @@ GARBAGE_COLLECTION = [
         "item_name": "metal_can.png",
         "item_type": "metal",
         "item_image": "metal_can.png.png"
-    }  
+    },  
+    {
+        "item_name": "aerosol_can",
+        "item_type": "NA",
+        "item_image": "aerosol_can.png"
+    },
+    {
+        "item_name": "dirty_pizza_box",
+        "item_type": "NA",
+        "item_image": "dirty_pizza_box.png"
+    },
+    {
+        "item_name": "dirty_pizza_box",
+        "item_type": "NA",
+        "item_image": "dirty_pizza_box.png"
+    }
 ]
 
 FPS = 60
@@ -127,15 +142,7 @@ def draw_window(current_garbages):
     pygame.draw.rect(WIN, BLACK, BORDER)
 
     for garbage in current_garbages:
-<<<<<<< Updated upstream
         image = pygame.image.load(os.path.join(IMAGE_PATH, garbage['item_image']))
-=======
-<<<<<<< HEAD
-        image = os.path.join(IMAGE_PATH, garbage['item_image'])
-=======
-        image = pygame.image.load(os.path.join(IMAGE_PATH, garbage['item_image']))
->>>>>>> 9eb0f65aa4e8ef79943053b7e9bec4720e262e54
->>>>>>> Stashed changes
         WIN.blit(image, (garbage['item'].x, garbage['item'].y))
 
     pygame.display.update()
@@ -145,16 +152,11 @@ def draw_notes(note, posX, posY):
     WIN.blit(draw_note, (posX, posY))
     pygame.display.update()
     pygame.time.delay(5000)
-#to be delete, here for copy\paste
+
 #loads image files as objects, will probably be in classes later
+
 #bin = pygame.image.load(os.path.join(IMAGE_PATH, 'bin.png'))
 #sorting_table = pygame.image.load(os.path.join(IMAGE_PATH, 'foreground_table.png'))
-#aerosol_can = pygame.image.load(os.path.join(IMAGE_PATH, 'aerosol_can.png'))
-#dirty_pizza_box = pygame.image.load(os.path.join(IMAGE_PATH, 'dirty_pizza_box.png'))
-#styrofoam_cup = pygame.image.load(os.path.join(IMAGE_PATH, 'styrofoam_cup.png'))
-
-
-
 
 
 def main():
