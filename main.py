@@ -25,53 +25,68 @@ MAX_GARBAGE = 5
 HEALTH_FONT = pygame.font.SysFont('comicsans', 40)
 WINNER_FONT = pygame.font.SysFont('comicsans', 100)
 
-RECYCLING_TYPE = ["plastic", "paper", "glass"]
+RECYCLING_TYPE = ["plastic", "paper", "glass", "metal", "NA"]#NA placeholder for future types i.e. hazmat
 GARBAGE_COLLECTION = [
     {
-        "item_name": "water_bottle",
+        "item_name": "plastic_gallon_jug",
         "item_type": "plastic",
-        "item_image": ""
+        "item_image": "plastic_gallon_jug.png"
     },
     {
-        "item_name": "milk_jug",
+        "item_name": "water_bottle.png",
         "item_type": "plastic",
-        "item_image": ""
+        "item_image": "water_bottle.png.png"
     },
     {
-        "item_name": "laundry_soap_bottle",
+        "item_name": "laundry_det_bottle",
         "item_type": "plastic",
-        "item_image": ""
+        "item_image": "laundry_det_bottle.png"
     },
     {
         "item_name": "carboard_box",
         "item_type": "paper",
-        "item_image": ""
+        "item_image": "cardboard_box.png"
     },
     {
         "item_name": "newspaper",
         "item_type": "paper",
-        "item_image": ""
+        "item_image": "newspaper.png"
     },
     {
-        "item_name": "brown_bag",
+        "item_name": "brown_paper_bag",
         "item_type": "paper",
-        "item_image": ""
+        "item_image": "brown_paper_bag.png"
     },
     {
-        "item_name": "soda_bottle",
+        "item_name": "green_glass_bottle",
         "item_type": "glass",
-        "item_image": ""
+        "item_image": "green_glass_bottle.png"
     },
     {
-        "item_name": "beer_bottle",
+        "item_name": "brown_glass_bottle",
         "item_type": "glass",
-        "item_image": ""
+        "item_image": "brown_glass_bottle.png"
     },
     {
-        "item_name": "soda_can",
+        "item_name": "glass_jar",
+        "item_type": "glass",
+        "item_image": "glass_jar.png"
+    },
+    {
+        "item_name": "alum_soda_can",
         "item_type": "metal",
-        "item_image": ""
-    }
+        "item_image": "alum_soda_can.png"
+    },
+    {
+        "item_name": "short_metal_can",
+        "item_type": "metal",
+        "item_image": "short_metal_can.png"
+    },
+    {
+        "item_name": "metal_can.png",
+        "item_type": "metal",
+        "item_image": "metal_can.png.png"
+    }  
 ]
 
 FPS = 60
