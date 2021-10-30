@@ -1,5 +1,7 @@
 import pygame
 import os
+import random
+
 pygame.font.init()
 pygame.mixer.init()
 
@@ -16,6 +18,9 @@ YELLOW = (255, 255, 0)
 BORDER = pygame.Rect(WIDTH//2 - 5, 0, 10, HEIGHT)
 
 IMAGE_PATH = os.path.join(os.getcwd(), 'assets\images')#concates working dir with image location
+
+GARBAGE_WIDTH, GARABGE_HEIGHT = 55, 40
+MAX_GARBAGE = 5
 
 HEALTH_FONT = pygame.font.SysFont('comicsans', 40)
 WINNER_FONT = pygame.font.SysFont('comicsans', 100)
@@ -90,7 +95,7 @@ def draw_window(current_garbages):
     pygame.draw.rect(WIN, BLACK, BORDER)
 
     for garbage in current_garbages:
-        image = os.path.join(IMAGE_PATH, garbage['item_image']))
+        image = pygame.image.load(os.path.join(IMAGE_PATH, garbage['item_image']))
         WIN.blit(image, (garbage['item'].x, garbage['item'].y))
 
     pygame.display.update()
