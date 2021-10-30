@@ -21,7 +21,10 @@ IMAGE_PATH = os.path.join(os.getcwd(), 'assets\images')#concates working dir wit
 
 GARBAGE_WIDTH, GARABGE_HEIGHT = 55, 40
 BIN_WIDTH, BIN_HEIGHT = 55, 40
+TABLE_WIDTH, TABLE_HEIGHT = 478, 237
 MAX_GARBAGE = 5
+TABLE_LOCATIONX = (WIDTH - TABLE_WIDTH) // 2
+TABLE_LOCATIONY = HEIGHT - (TABLE_HEIGHT + 10)
 
 HEALTH_FONT = pygame.font.SysFont('comicsans', 40)
 WINNER_FONT = pygame.font.SysFont('comicsans', 100)
@@ -44,9 +47,9 @@ GARBAGE_COLLECTION = [
         "item_image": "plastic_gallon_jug.png"
     },
     {
-        "item_name": "water_bottle.png",
+        "item_name": "water_bottle",
         "item_type": "plastic",
-        "item_image": "water_bottle.png.png"
+        "item_image": "water_bottle.png"
     },
     {
         "item_name": "laundry_det_bottle",
@@ -96,7 +99,7 @@ GARBAGE_COLLECTION = [
     {
         "item_name": "metal_can.png",
         "item_type": "metal",
-        "item_image": "metal_can.png.png"
+        "item_image": "metal_can.png"
     },  
     {
         "item_name": "aerosol_can",
@@ -108,22 +111,20 @@ GARBAGE_COLLECTION = [
         "item_type": "NA",
         "item_image": "dirty_pizza_box.png"
     },
-    {
-        "item_name": "dirty_pizza_box",
-        "item_type": "NA",
-        "item_image": "dirty_pizza_box.png"
-    }
+    # {
+    #     "item_name": "dirty_pizza_box",
+    #     "item_type": "NA",
+    #     "item_image": "dirty_pizza_box.png"
+    # }
 ]
 
 SCENE_COLLECTION = [
     {
-        "item_name": "bin",
-        "item_image": "bin.png"
-    },
-    {
         "item_name": "foreground_table",
-        "item_image": "foreground_table.png"
-#    },
+        "item_image": "foreground_table.png",
+        "location_x": TABLE_LOCATIONX,
+        "location_y": TABLE_LOCATIONY
+    },
 #    {
 #        "item_name": "wall",
 #        "item_image": ""
@@ -131,37 +132,37 @@ SCENE_COLLECTION = [
 #    {
 #        "item_name": "floor",
 #        "item_image": ""
-    }
+#    }
 ]
 
 
 
 FPS = 60
 
-def drag():
-    if event.type == pygame.MOUSEBUTTONDOWN:
-        pos = pygame.mouse.get_pos()
-        x = pos[0]
-        y = pos[1]
-        if event.button == 1:
-            if garbage.rect.collidepoint(pos):
-                garbage.clicked == True
-    if event.type == pygame.MOUSEBUTTONUP:
-        garbage.clicked = False
+# def drag():
+#     if event.type == pygame.MOUSEBUTTONDOWN:
+#         pos = pygame.mouse.get_pos()
+#         x = pos[0]
+#         y = pos[1]
+#         if event.button == 1:
+#             if garbage.rect.collidepoint(pos):
+#                 garbage.clicked == True
+#     if event.type == pygame.MOUSEBUTTONUP:
+#         garbage.clicked = False
 
-def garbageClicked():
-    if garbage.clicked == True:
-        pos = pygame.mouse.get_pos()
-        garbage.rect.x = pos[0] - (garbage.rect.width/2)
-        garbage.rect.y = pos[1] - (garbage.rect.width/2)
+# def garbageClicked():
+#     if garbage.clicked == True:
+#         pos = pygame.mouse.get_pos()
+#         garbage.rect.x = pos[0] - (garbage.rect.width/2)
+#         garbage.rect.y = pos[1] - (garbage.rect.width/2)
 
 def generateGarbages():
     garbages = []
     offsetBetweenGarbageItems = 30
     randomGarbages = random.sample(GARBAGE_COLLECTION, MAX_GARBAGE)
     for garbage in randomGarbages:
-        locationX = 10 + (GARBAGE_WIDTH + offsetBetweenGarbageItems) * len(garbages)
-        locationY = HEIGHT - (10 + GARABGE_HEIGHT)
+        locationX = TABLE_LOCATIONX + 40 + (GARBAGE_WIDTH + offsetBetweenGarbageItems) * len(garbages)
+        locationY = TABLE_LOCATIONY + 50
         garbage['item'] = pygame.Rect(locationX, locationY, GARBAGE_WIDTH, GARABGE_HEIGHT)
         garbages.append(garbage)
         print(garbage['item_name'])
@@ -170,27 +171,30 @@ def generateGarbages():
 
 def generateBins():
     bins = []
-    offsetBetweenBins = 100
+    offsetBetweenBins = 250
     for bin in BIN_COLLECTION:
-        locationX = 10 + (GARBAGE_WIDTH + offsetBetweenBins) * len(bins)
-        locationY = 10 + GARABGE_HEIGHT
+        locationX = WIDTH // 2 - 200 + (BIN_WIDTH + offsetBetweenBins) * len(bins)
+        locationY = 10 + BIN_HEIGHT
         bin['bin'] = pygame.Rect(locationX, locationY, BIN_WIDTH, BIN_HEIGHT)
         bins.append(bin)
 
     return bins
 
-def traggleGarbageToBin(x):
-    x = x
-
 def draw_window(current_garbages, bins):
     pygame.draw.rect(WIN, BLACK, BORDER)
 
+    for scene in SCENE_COLLECTION:
+        image = pygame.image.load(os.path.join(IMAGE_PATH, scene['item_image']))
+        WIN.blit(image, (scene['location_x'], scene['location_y']))
+
     for garbage in current_garbages:
         image = pygame.image.load(os.path.join(IMAGE_PATH, garbage['item_image']))
+        pygame.transform.scale(image, (GARBAGE_WIDTH, GARABGE_HEIGHT))
         WIN.blit(image, (garbage['item'].x, garbage['item'].y))
 
     for bin in bins:
         image = pygame.image.load(os.path.join(IMAGE_PATH, bin['bin_image']))
+        pygame.transform.scale(image, (BIN_WIDTH, BIN_HEIGHT))
         WIN.blit(image, (bin['bin'].x, bin['bin'].y))
 
     pygame.display.update()
