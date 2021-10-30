@@ -86,7 +86,22 @@ GARBAGE_COLLECTION = [
         "item_name": "metal_can.png",
         "item_type": "metal",
         "item_image": "metal_can.png.png"
-    }  
+    },  
+    {
+        "item_name": "aerosol_can",
+        "item_type": "NA",
+        "item_image": "aerosol_can.png"
+    },
+    {
+        "item_name": "dirty_pizza_box",
+        "item_type": "NA",
+        "item_image": "dirty_pizza_box.png"
+    },
+    {
+        "item_name": "dirty_pizza_box",
+        "item_type": "NA",
+        "item_image": "dirty_pizza_box.png"
+    }
 ]
 
 FPS = 60
@@ -125,23 +140,6 @@ def draw_notes(note, posX, posY):
 
 #bin = pygame.image.load(os.path.join(IMAGE_PATH, 'bin.png'))
 #sorting_table = pygame.image.load(os.path.join(IMAGE_PATH, 'foreground_table.png'))
-#aerosol_can = pygame.image.load(os.path.join(IMAGE_PATH, 'aerosol_can.png'))
-#alum_soda_can = pygame.image.load(os.path.join(IMAGE_PATH, 'alum_soda_can.png'))
-#brown_glass_bottle = pygame.image.load(os.path.join(IMAGE_PATH, 'brown_glass_bottle.png'))
-#brown_paper_bag = pygame.image.load(os.path.join(IMAGE_PATH, 'brown_paper_bag.png'))
-#cardboard_box = pygame.image.load(os.path.join(IMAGE_PATH, 'cardboard_box.png'))
-#dirty_pizza_box = pygame.image.load(os.path.join(IMAGE_PATH, 'dirty_pizza_box.png'))
-#glass_bottle = pygame.image.load(os.path.join(IMAGE_PATH, 'glass_bottle.png'))
-#glass_jar = pygame.image.load(os.path.join(IMAGE_PATH, 'glass_jar.png'))
-#laundry_det_bottle = pygame.image.load(os.path.join(IMAGE_PATH, 'laundry_det_bottle.png'))
-#metal_can = pygame.image.load(os.path.join(IMAGE_PATH, 'metal_can.png'))
-#newspaper = pygame.image.load(os.path.join(IMAGE_PATH, 'newspaper.png'))
-#plastic_gallon_jug = pygame.image.load(os.path.join(IMAGE_PATH, 'plastic_gallon_jug.png'))
-#short_metal_can = pygame.image.load(os.path.join(IMAGE_PATH, 'short_metal_can.png'))
-#styrofoam_cup = pygame.image.load(os.path.join(IMAGE_PATH, 'styrofoam_cup.png'))
-#water_bottle = pygame.image.load(os.path.join(IMAGE_PATH, 'water_bottle.png'))
-
-
 
 
 def main():
