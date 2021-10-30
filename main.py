@@ -91,6 +91,23 @@ GARBAGE_COLLECTION = [
 
 FPS = 60
 
+def drag():
+    if event.type == pygame.MOUSEBUTTONDOWN:
+        pos = pygame.mouse.get_pos()
+        x = pos[0]
+        y = pos[1]
+        if event.button == 1:
+            if garbage.rect.collidepoint(pos):
+                garbage.clicked == True
+    if event.type == pygame.MOUSEBUTTONUP:
+        garbage.clicked = False
+
+def garbageClicked():
+    if garbage.clicked == True:
+        pos = pygame.mouse.get_pos()
+        garbage.rect.x = pos[0] - (garbage.rect.width/2)
+        garbage.rect.y = pos[1] - (garbage.rect.width/2)
+
 def generateGarbages():
     garbages = []
     offsetBetweenGarbageItems = 30
