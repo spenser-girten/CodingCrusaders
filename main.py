@@ -20,16 +20,79 @@ IMAGE_PATH = os.path.join(os.getcwd(), 'assets\images')#concates working dir wit
 HEALTH_FONT = pygame.font.SysFont('comicsans', 40)
 WINNER_FONT = pygame.font.SysFont('comicsans', 100)
 
+RECYCLING_TYPE = ["plastic", "paper", "glass"]
+GARBAGE_COLLECTION = [
+    {
+        "item_name": "water_bottle",
+        "item_type": "plastic",
+        "item_image": ""
+    },
+    {
+        "item_name": "milk_jug",
+        "item_type": "plastic",
+        "item_image": ""
+    },
+    {
+        "item_name": "laundry_soap_bottle",
+        "item_type": "plastic",
+        "item_image": ""
+    },
+    {
+        "item_name": "carboard_box",
+        "item_type": "paper",
+        "item_image": ""
+    },
+    {
+        "item_name": "newspaper",
+        "item_type": "paper",
+        "item_image": ""
+    },
+    {
+        "item_name": "brown_bag",
+        "item_type": "paper",
+        "item_image": ""
+    },
+    {
+        "item_name": "soda_bottle",
+        "item_type": "glass",
+        "item_image": ""
+    },
+    {
+        "item_name": "beer_bottle",
+        "item_type": "glass",
+        "item_image": ""
+    },
+    {
+        "item_name": "soda_can",
+        "item_type": "metal",
+        "item_image": ""
+    }
+]
+
 FPS = 60
 
-def generateGarbages(x):
-    x = x
+def generateGarbages():
+    garbages = []
+    offsetBetweenGarbageItems = 30
+    while(len(garbages) < MAX_GARBAGE):
+        locationX = 10 + (GARBAGE_WIDTH + offsetBetweenGarbageItems) * len(garbages)
+        locationY = 10 + GARABGE_HEIGHT
+        garbage = random.choice(GARBAGE_COLLECTION)
+        garbage['item'] = pygame.Rect(locationX, locationY, GARBAGE_WIDTH, GARABGE_HEIGHT)
+        garbages.append(garbage)
+
+    return garbages
 
 def traggleGarbageToBin(x):
     x = x
 
-def draw_window():
+def draw_window(current_garbages):
     pygame.draw.rect(WIN, BLACK, BORDER)
+
+    for garbage in current_garbages:
+        image = os.path.join(IMAGE_PATH, garbage['item_image']))
+        WIN.blit(image, (garbage['item'].x, garbage['item'].y))
+
     pygame.display.update()
 
 def draw_notes(note, posX, posY):
@@ -98,7 +161,6 @@ def main():
                     x = x
 
                 # Trigger custom functions
-                draw_notes("Sample Note", x, y)    
         
         #Trigger general handing fucntions
         draw_window()
