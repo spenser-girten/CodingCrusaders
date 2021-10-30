@@ -29,16 +29,17 @@ TABLE_LOCATIONY = HEIGHT - (TABLE_HEIGHT + 10)
 HEALTH_FONT = pygame.font.SysFont('comicsans', 40)
 WINNER_FONT = pygame.font.SysFont('comicsans', 100)
 RECYCLING_TYPE = ["plastic", "paper", "glass", "metal", "NA"]#NA placeholder for future types i.e. hazmat
-BIN_COLLECTION = [
-    {
-        "bin_name": "recycle_bin",
-        "bin_image": "bin.png"
-    },
-    {
-        "bin_name": "trash_bin",
-        "bin_image": "bin.png"
-    }
-]
+
+BIN_COLLECTION = []
+for i in RECYCLING_TYPE:
+    bin = {
+        "bin_name": ("recycle_bin_" + str(RECYCLING_TYPE.index(i))), 
+        "bin_image": "bin.png"}
+    BIN_COLLECTION.append(bin)
+trash = {
+    "bin_name": "trash_bin", 
+    "bin_image": "bin.png"}
+BIN_COLLECTION.append(trash)
 
 GARBAGE_COLLECTION = [
     {
@@ -145,10 +146,10 @@ def temperatureBar():
 #not completed bin drop detection
 def binDrop():
     if garbage.rect.colliderect(binrect, garbagerect):
-        #delete garbage sprite
+        x = 0
+      #delete garbage sprite
         #check bin type and garbage type
         #increase temp bar if mismatched types
-
 
 def drag():
     if event.type == pygame.MOUSEBUTTONDOWN:
