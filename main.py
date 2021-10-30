@@ -20,12 +20,25 @@ BORDER = pygame.Rect(WIDTH//2 - 5, 0, 10, HEIGHT)
 IMAGE_PATH = os.path.join(os.getcwd(), 'assets\images')#concates working dir with image location
 
 GARBAGE_WIDTH, GARABGE_HEIGHT = 55, 40
+BIN_WIDTH, BIN_HEIGHT = 55, 40
 MAX_GARBAGE = 5
 
 HEALTH_FONT = pygame.font.SysFont('comicsans', 40)
 WINNER_FONT = pygame.font.SysFont('comicsans', 100)
 
 RECYCLING_TYPE = ["plastic", "paper", "glass"]
+BIN_COLLECTION = [
+    {
+        "bin_name": "recycle_bin",
+        "bin_image": "bin.png"
+    },
+    {
+        "bin_name": "trash_bin",
+        "bin_image": "bin.png"
+    }
+]
+
+
 GARBAGE_COLLECTION = [
     {
         "item_name": "water_bottle",
@@ -74,29 +87,47 @@ GARBAGE_COLLECTION = [
     }
 ]
 
+
+
 FPS = 60
 
 def generateGarbages():
     garbages = []
     offsetBetweenGarbageItems = 30
-    while(len(garbages) < MAX_GARBAGE):
+    randomGarbages = random.sample(GARBAGE_COLLECTION, MAX_GARBAGE)
+    for garbage in randomGarbages:
         locationX = 10 + (GARBAGE_WIDTH + offsetBetweenGarbageItems) * len(garbages)
-        locationY = 10 + GARABGE_HEIGHT
-        garbage = random.choice(GARBAGE_COLLECTION)
+        locationY = HEIGHT - (10 + GARABGE_HEIGHT)
         garbage['item'] = pygame.Rect(locationX, locationY, GARBAGE_WIDTH, GARABGE_HEIGHT)
         garbages.append(garbage)
+        print(garbage['item_name'])
 
     return garbages
+
+def generateBins():
+    bins = []
+    offsetBetweenBins = 100
+    for bin in BIN_COLLECTION:
+        locationX = 10 + (GARBAGE_WIDTH + offsetBetweenBins) * len(bins)
+        locationY = 10 + GARABGE_HEIGHT
+        bin['bin'] = pygame.Rect(locationX, locationY, BIN_WIDTH, BIN_HEIGHT)
+        bins.append(bin)
+
+    return bins
 
 def traggleGarbageToBin(x):
     x = x
 
-def draw_window(current_garbages):
+def draw_window(current_garbages, bins):
     pygame.draw.rect(WIN, BLACK, BORDER)
 
     for garbage in current_garbages:
         image = pygame.image.load(os.path.join(IMAGE_PATH, garbage['item_image']))
         WIN.blit(image, (garbage['item'].x, garbage['item'].y))
+
+    for bin in bins:
+        image = pygame.image.load(os.path.join(IMAGE_PATH, bin['bin_image']))
+        WIN.blit(image, (bin['bin'].x, bin['bin'].y))
 
     pygame.display.update()
 
@@ -133,11 +164,15 @@ def main():
     clock = pygame.time.Clock()
     run = True
     current_garbages = []
+    bins = []
     while run:
         clock.tick(FPS)
 
         if not current_garbages:
             current_garbages = generateGarbages()
+        
+        if not bins:
+            bins = generateBins()
 
         # Event handlers
         for event in pygame.event.get():
@@ -172,7 +207,7 @@ def main():
                 # Trigger custom functions
         
         #Trigger general handing fucntions
-        draw_window(current_garbages)
+        draw_window(current_garbages, bins)
 
     main()
 
