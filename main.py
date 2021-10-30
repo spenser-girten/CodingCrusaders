@@ -33,7 +33,7 @@ RECYCLING_TYPE = ["plastic", "paper", "glass", "metal", "NA"]#NA placeholder for
 BIN_COLLECTION = []
 for i in RECYCLING_TYPE:
     bin = {
-        "bin_name": ("recycle_bin_" + str(RECYCLING_TYPE.index(i))), 
+        "bin_name":i, 
         "bin_image": "bin.png"}
     BIN_COLLECTION.append(bin)
 trash = {
@@ -140,35 +140,35 @@ SCENE_COLLECTION = [
 
 FPS = 60
 #bar hovering on the top of the screen
-def temperatureBar():
-    pygame.draw.rect(surface, (255,255,255), pygame.Rect(10,10,940,10),1)
+# def temperatureBar():
+#     pygame.draw.rect(surface, (255,255,255), pygame.Rect(10,10,940,10),1)
 
-#not completed bin drop detection
-def binDrop():
-    if garbage.rect.colliderect(binrect, garbagerect):
-        x = 0
-      #delete garbage sprite
-        #check bin type and garbage type
-        #increase temp bar if mismatched types
+# #not completed bin drop detection
+# def binDrop():
+#     if garbage.rect.colliderect(binrect, garbagerect):
+#         x = 0
+#       #delete garbage sprite
+#         #check bin type and garbage type
+#         #increase temp bar if mismatched types
 
-def drag():
-    if event.type == pygame.MOUSEBUTTONDOWN:
-        pos = pygame.mouse.get_pos()
-        x = pos[0]
-        y = pos[1]
-        if event.button == 1:
-            for garbage in garbages:
-                if garbage.rect.collidepoint(pos):
-                    garbage.clicked == True
-    if event.type == pygame.MOUSEBUTTONUP:
-        garbage.clicked = False
+# def drag():
+#     if event.type == pygame.MOUSEBUTTONDOWN:
+#         pos = pygame.mouse.get_pos()
+#         x = pos[0]
+#         y = pos[1]
+#         if event.button == 1:
+#             for garbage in garbages:
+#                 if garbage.rect.collidepoint(pos):
+#                     garbage.clicked == True
+#     if event.type == pygame.MOUSEBUTTONUP:
+#         garbage.clicked = False
 
-def garbageClicked():
-    for garbage in garbages:
-        if garbage.clicked == True:
-            pos = pygame.mouse.get_pos()
-            garbage.rect.x = pos[0] - (garbage.rect.width/2)
-            garbage.rect.y = pos[1] - (garbage.rect.width/2)
+# def garbageClicked():
+#     for garbage in garbages:
+#         if garbage.clicked == True:
+#             pos = pygame.mouse.get_pos()
+#             garbage.rect.x = pos[0] - (garbage.rect.width/2)
+#             garbage.rect.y = pos[1] - (garbage.rect.width/2)
 
 def generateGarbages():
     garbages = []
@@ -178,6 +178,8 @@ def generateGarbages():
         locationX = TABLE_LOCATIONX + 40 + (GARBAGE_WIDTH + offsetBetweenGarbageItems) * len(garbages)
         locationY = TABLE_LOCATIONY + 50
         garbage['item'] = pygame.Rect(locationX, locationY, GARBAGE_WIDTH, GARABGE_HEIGHT)
+        image = pygame.image.load(os.path.join(IMAGE_PATH, garbage['item_image']))
+        garbage['item_image'] = pygame.transform.scale(image, (GARBAGE_WIDTH, GARABGE_HEIGHT))
         garbages.append(garbage)
         print(garbage['item_name'])
 
@@ -187,7 +189,7 @@ def generateBins():
     bins = []
     offsetBetweenBins = 250
     for bin in BIN_COLLECTION:
-        locationX = WIDTH // 2 - 200 + (BIN_WIDTH + offsetBetweenBins) * len(bins)
+        locationX = WIDTH // 2 - 350 + (BIN_WIDTH + offsetBetweenBins) * len(bins)
         locationY = 10 + BIN_HEIGHT
         bin['bin'] = pygame.Rect(locationX, locationY, BIN_WIDTH, BIN_HEIGHT)
         bins.append(bin)
@@ -202,22 +204,20 @@ def draw_window(current_garbages, bins):
         WIN.blit(image, (scene['location_x'], scene['location_y']))
 
     for garbage in current_garbages:
-        image = pygame.image.load(os.path.join(IMAGE_PATH, garbage['item_image']))
-        pygame.transform.scale(image, (GARBAGE_WIDTH, GARABGE_HEIGHT))
-        WIN.blit(image, (garbage['item'].x, garbage['item'].y))
+        WIN.blit(garbage['item_image'], (garbage['item'].x, garbage['item'].y))
 
     for bin in bins:
         image = pygame.image.load(os.path.join(IMAGE_PATH, bin['bin_image']))
         pygame.transform.scale(image, (BIN_WIDTH, BIN_HEIGHT))
         WIN.blit(image, (bin['bin'].x, bin['bin'].y))
+        draw_note = HEALTH_FONT.render(bin['bin_name'], 1, WHITE)
+        WIN.blit(draw_note, (bin['bin'].x + 10, (bin['bin'].y + BIN_HEIGHT + 120)))
 
     pygame.display.update()
 
 def draw_notes(note, posX, posY):
-    draw_note = WINNER_FONT.render(note, 1, WHITE)
+    draw_note = HEALTH_FONT.render(note, 1, WHITE)
     WIN.blit(draw_note, (posX, posY))
-    pygame.display.update()
-    pygame.time.delay(5000)
 
 
 def main():
@@ -246,7 +246,8 @@ def main():
 
             # Handle mouse lick
             if event.type == pygame.MOUSEBUTTONDOWN:
-                
+                print('click')
+                print(event.button)
                 #Fetch mouse position
                 pos = pygame.mouse.get_pos()
                 x = pos[0]
@@ -257,16 +258,28 @@ def main():
                     x = x
 
                 # Mouse left key clicked
+                if event.button == 1:
+                    for garbage in current_garbages:
+                        if garbage['item'].collidepoint(pos):
+                            garbage['clicked'] = True
+
+                # Mouse right key clicked
                 if event.button == 2:
                     x = x
 
-                # Mouse right key clicked
-                if event.button == 1:
-                    x = x
-
                 # Trigger custom functions
+            if event.type == pygame.MOUSEBUTTONUP:
+                for garbage in current_garbages:
+                        garbage['clicked'] = False
+
         
         #Trigger general handing fucntions
+        for garbage in current_garbages:
+            if 'clicked' in garbage and garbage['clicked'] == True:
+                pos = pygame.mouse.get_pos()
+                garbage['item'].x = pos[0] - (garbage['item'].width/2)
+                garbage['item'].y = pos[1] - (garbage['item'].height/2)
+
         draw_window(current_garbages, bins)
 
     main()
