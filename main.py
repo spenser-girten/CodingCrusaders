@@ -3,7 +3,7 @@ import os
 pygame.font.init()
 pygame.mixer.init()
 
-WIDTH, HEIGHT = 1000, 800
+WIDTH, HEIGHT = 960, 540#half the size of 1080p
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Hack-A-Thon")
 
