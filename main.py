@@ -132,8 +132,12 @@ def draw_notes(note, posX, posY):
 def main():
     clock = pygame.time.Clock()
     run = True
+    current_garbages = []
     while run:
         clock.tick(FPS)
+
+        if not current_garbages:
+            current_garbages = generateGarbages()
 
         # Event handlers
         for event in pygame.event.get():
@@ -168,7 +172,7 @@ def main():
                 # Trigger custom functions
         
         #Trigger general handing fucntions
-        draw_window()
+        draw_window(current_garbages)
 
     main()
 
