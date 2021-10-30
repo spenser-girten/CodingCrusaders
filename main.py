@@ -104,6 +104,25 @@ GARBAGE_COLLECTION = [
     }
 ]
 
+SCENE_COLLECTION = [
+    {
+        "item_name": "bin",
+        "item_image": "bin.png"
+    },
+    {
+        "item_name": "foreground_table",
+        "item_image": "foreground_table.png"
+#    },
+#    {
+#        "item_name": "wall",
+#        "item_image": ""
+#    },
+#    {
+#        "item_name": "floor",
+#        "item_image": ""
+    }
+]
+
 FPS = 60
 
 def drag():
@@ -152,11 +171,6 @@ def draw_notes(note, posX, posY):
     WIN.blit(draw_note, (posX, posY))
     pygame.display.update()
     pygame.time.delay(5000)
-
-#loads image files as objects, will probably be in classes later
-
-#bin = pygame.image.load(os.path.join(IMAGE_PATH, 'bin.png'))
-#sorting_table = pygame.image.load(os.path.join(IMAGE_PATH, 'foreground_table.png'))
 
 
 def main():
