@@ -138,23 +138,36 @@ SCENE_COLLECTION = [
 
 
 FPS = 60
+#bar hovering on the top of the screen
+def temperatureBar():
+    pygame.draw.rect(surface, (255,255,255), pygame.Rect(10,10,940,10),1)
 
-# def drag():
-#     if event.type == pygame.MOUSEBUTTONDOWN:
-#         pos = pygame.mouse.get_pos()
-#         x = pos[0]
-#         y = pos[1]
-#         if event.button == 1:
-#             if garbage.rect.collidepoint(pos):
-#                 garbage.clicked == True
-#     if event.type == pygame.MOUSEBUTTONUP:
-#         garbage.clicked = False
+#not completed bin drop detection
+def binDrop():
+    if garbage.rect.colliderect(binrect, garbagerect):
+        #delete garbage sprite
+        #check bin type and garbage type
+        #increase temp bar if mismatched types
 
-# def garbageClicked():
-#     if garbage.clicked == True:
-#         pos = pygame.mouse.get_pos()
-#         garbage.rect.x = pos[0] - (garbage.rect.width/2)
-#         garbage.rect.y = pos[1] - (garbage.rect.width/2)
+
+def drag():
+    if event.type == pygame.MOUSEBUTTONDOWN:
+        pos = pygame.mouse.get_pos()
+        x = pos[0]
+        y = pos[1]
+        if event.button == 1:
+            for garbage in garbages:
+                if garbage.rect.collidepoint(pos):
+                    garbage.clicked == True
+    if event.type == pygame.MOUSEBUTTONUP:
+        garbage.clicked = False
+
+def garbageClicked():
+    for garbage in garbages:
+        if garbage.clicked == True:
+            pos = pygame.mouse.get_pos()
+            garbage.rect.x = pos[0] - (garbage.rect.width/2)
+            garbage.rect.y = pos[1] - (garbage.rect.width/2)
 
 def generateGarbages():
     garbages = []
