@@ -25,68 +25,53 @@ MAX_GARBAGE = 5
 HEALTH_FONT = pygame.font.SysFont('comicsans', 40)
 WINNER_FONT = pygame.font.SysFont('comicsans', 100)
 
-RECYCLING_TYPE = ["plastic", "paper", "glass", "metal", "NA"]#NA placeholder for future types i.e. hazmat
+RECYCLING_TYPE = ["plastic", "paper", "glass"]
 GARBAGE_COLLECTION = [
     {
-        "item_name": "plastic_gallon_jug",
+        "item_name": "water_bottle",
         "item_type": "plastic",
-        "item_image": "plastic_gallon_jug.png"
+        "item_image": ""
     },
     {
-        "item_name": "water_bottle.png",
+        "item_name": "milk_jug",
         "item_type": "plastic",
-        "item_image": "water_bottle.png.png"
+        "item_image": ""
     },
     {
-        "item_name": "laundry_det_bottle",
+        "item_name": "laundry_soap_bottle",
         "item_type": "plastic",
-        "item_image": "laundry_det_bottle.png"
+        "item_image": ""
     },
     {
         "item_name": "carboard_box",
         "item_type": "paper",
-        "item_image": "cardboard_box.png"
+        "item_image": ""
     },
     {
         "item_name": "newspaper",
         "item_type": "paper",
-        "item_image": "newspaper.png"
+        "item_image": ""
     },
     {
-        "item_name": "brown_paper_bag",
+        "item_name": "brown_bag",
         "item_type": "paper",
-        "item_image": "brown_paper_bag.png"
+        "item_image": ""
     },
     {
-        "item_name": "green_glass_bottle",
+        "item_name": "soda_bottle",
         "item_type": "glass",
-        "item_image": "green_glass_bottle.png"
+        "item_image": ""
     },
     {
-        "item_name": "brown_glass_bottle",
+        "item_name": "beer_bottle",
         "item_type": "glass",
-        "item_image": "brown_glass_bottle.png"
+        "item_image": ""
     },
     {
-        "item_name": "glass_jar",
-        "item_type": "glass",
-        "item_image": "glass_jar.png"
-    },
-    {
-        "item_name": "alum_soda_can",
+        "item_name": "soda_can",
         "item_type": "metal",
-        "item_image": "alum_soda_can.png"
-    },
-    {
-        "item_name": "short_metal_can",
-        "item_type": "metal",
-        "item_image": "short_metal_can.png"
-    },
-    {
-        "item_name": "metal_can.png",
-        "item_type": "metal",
-        "item_image": "metal_can.png.png"
-    }  
+        "item_image": ""
+    }
 ]
 
 FPS = 60
@@ -110,15 +95,7 @@ def draw_window(current_garbages):
     pygame.draw.rect(WIN, BLACK, BORDER)
 
     for garbage in current_garbages:
-<<<<<<< Updated upstream
         image = pygame.image.load(os.path.join(IMAGE_PATH, garbage['item_image']))
-=======
-<<<<<<< HEAD
-        image = os.path.join(IMAGE_PATH, garbage['item_image'])
-=======
-        image = pygame.image.load(os.path.join(IMAGE_PATH, garbage['item_image']))
->>>>>>> 9eb0f65aa4e8ef79943053b7e9bec4720e262e54
->>>>>>> Stashed changes
         WIN.blit(image, (garbage['item'].x, garbage['item'].y))
 
     pygame.display.update()
@@ -128,14 +105,26 @@ def draw_notes(note, posX, posY):
     WIN.blit(draw_note, (posX, posY))
     pygame.display.update()
     pygame.time.delay(5000)
-#to be delete, here for copy\paste
+
 #loads image files as objects, will probably be in classes later
+
 #bin = pygame.image.load(os.path.join(IMAGE_PATH, 'bin.png'))
 #sorting_table = pygame.image.load(os.path.join(IMAGE_PATH, 'foreground_table.png'))
 #aerosol_can = pygame.image.load(os.path.join(IMAGE_PATH, 'aerosol_can.png'))
+#alum_soda_can = pygame.image.load(os.path.join(IMAGE_PATH, 'alum_soda_can.png'))
+#brown_glass_bottle = pygame.image.load(os.path.join(IMAGE_PATH, 'brown_glass_bottle.png'))
+#brown_paper_bag = pygame.image.load(os.path.join(IMAGE_PATH, 'brown_paper_bag.png'))
+#cardboard_box = pygame.image.load(os.path.join(IMAGE_PATH, 'cardboard_box.png'))
 #dirty_pizza_box = pygame.image.load(os.path.join(IMAGE_PATH, 'dirty_pizza_box.png'))
+#glass_bottle = pygame.image.load(os.path.join(IMAGE_PATH, 'glass_bottle.png'))
+#glass_jar = pygame.image.load(os.path.join(IMAGE_PATH, 'glass_jar.png'))
+#laundry_det_bottle = pygame.image.load(os.path.join(IMAGE_PATH, 'laundry_det_bottle.png'))
+#metal_can = pygame.image.load(os.path.join(IMAGE_PATH, 'metal_can.png'))
+#newspaper = pygame.image.load(os.path.join(IMAGE_PATH, 'newspaper.png'))
+#plastic_gallon_jug = pygame.image.load(os.path.join(IMAGE_PATH, 'plastic_gallon_jug.png'))
+#short_metal_can = pygame.image.load(os.path.join(IMAGE_PATH, 'short_metal_can.png'))
 #styrofoam_cup = pygame.image.load(os.path.join(IMAGE_PATH, 'styrofoam_cup.png'))
-
+#water_bottle = pygame.image.load(os.path.join(IMAGE_PATH, 'water_bottle.png'))
 
 
 
